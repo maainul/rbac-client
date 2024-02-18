@@ -27,12 +27,12 @@ const ForgotPassword = () => {
                         <div className="inputBtn">
                             <button
                                 type="submit"
-                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-6'>Login</button>
+                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-6'>Send reset link</button>
                         </div>
                         <div className='text-center my-4 text-sm md:text-base'>
-                            <span className='text-slate-500'>New on our platform?</span> <span onClick={() => {
+                            <span onClick={() => {
                                 navigate('/signup')
-                            }} className='text-indigo-600'>Create an account</span>
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1'>Back to Home</span>
                         </div>
                     </form>
                 </div>

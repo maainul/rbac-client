@@ -52,7 +52,7 @@ const SignupPage = () => {
                         <div className='text-center my-4 text-sm md:text-base'>
                             <span className='text-slate-500'>Already have an account ?</span> <span onClick={() => {
                                 navigate('/signin')
-                            }} className='text-indigo-600'>Sign in instead</span>
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1'>Sign in instead</span>
                         </div>
                     </form>
                 </div>
