@@ -25,7 +25,7 @@ const SigninPage = () => {
                                 <div className='input-box  flex flex-col'>
                                     <div className='flex justify-between'>
                                         <label className='font-medium mb-2'>Password</label>
-                                        <span className='text-indigo-600 text-base underline underline-offset-1 hover:cursor-pointer' onClick={() => {
+                                        <span className='text-indigo-600 text-sm md:text-base underline underline-offset-1 hover:cursor-pointer' onClick={() => {
                                             navigate('/forgot-password')
                                         }}>Forgot Password</span>
                                     </div>
@@ -39,13 +39,13 @@ const SigninPage = () => {
                         <div className="inputBtn">
                             <button
                                 type="submit"
-                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-6'>Login</button>
+                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-6 hover:bg-blue-500'>Login</button>
                         </div>
                         <div className='text-center my-4 text-sm md:text-base'>
                             <span className='text-slate-500'>New on our platform? </span>
                             <span onClick={() => {
                                 navigate('/')
-                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1'>Create an account</span>
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Create an account</span>
                         </div>
                     </form>
                 </div>

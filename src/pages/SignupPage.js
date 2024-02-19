@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes, faWarning } from '@fortawesome/free-solid-svg-icons';
 
 const SignupPage = () => {
     const [username, setUsername] = useState('');
@@ -9,17 +11,26 @@ const SignupPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
     const [passwordStrength, setPasswordStrength] = useState('');
+    const [passwordTouched, setPasswordTouched] = useState(false)
+    const [passIsMatch, setPassIsMatch] = useState(false)
+
     const navigate = useNavigate();
 
+    // password strencth checker
     const handleChangePassword = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
         const strength = calculatePasswordStrength(newPassword);
         setPasswordStrength(strength);
+        setPasswordTouched(true)
     };
 
+    // calculate length and strength
     const calculatePasswordStrength = (password) => {
-        if (password.length < 4) {
+        if (password.length === 0) {
+            return "no";
+        }
+        else if (password.length < 4) {
             return 'weak';
         } else if (password.length >= 4 && password.length < 8) {
             return 'medium';
@@ -27,20 +38,27 @@ const SignupPage = () => {
             return 'strong';
         }
     };
-    
 
+    // add color based on strength
     const passwordStrengthColor = (strength) => {
         if (strength === 'strong') {
-            return 'green-500';
+            return 'text-green-500';
         } else if (strength === 'medium') {
-            return 'yellow-500';
+            return 'text-yellow-500';
         } else if (strength === 'weak') {
-            return 'red-500';
+            return 'text-red-500';
         }
-        return 'gray-500'; // Default color
+        return 'text-gray-500'; // Default color
     };
-    
-    
+
+    // Confirm Password Match Check
+    const hanelConfirmPassword = (e) => {
+        const { value } = e.target
+        setConfirmPassword(value);
+        setPassIsMatch(value === password);
+    }
+
+    // submit and 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -79,7 +97,7 @@ const SignupPage = () => {
                                     className='border border-slate-300 rounded-md shadow-sm placeholder-slate-400 p-2 focus:outline-none focus:border-sky-400'
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
-                                {errors && errors.filter((error) => error.field === "username").map((filteredError) => (
+                                {(username === '' && errors) && errors.filter((error) => error.field === "username").map((filteredError) => (
                                     <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
                                 ))}
                             </div>
@@ -91,7 +109,7 @@ const SignupPage = () => {
                                     className='border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 focus:outline-none focus:border-sky-400'
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                {errors && errors.filter((error) => error.field === "email").map((filteredError) => (
+                                {(email === '' && errors) && errors.filter((error) => error.field === "email").map((filteredError) => (
                                     <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
                                 ))}
                             </div>
@@ -101,10 +119,21 @@ const SignupPage = () => {
                                     <input
                                         type='password'
                                         placeholder='Enter your password'
-                                        className='border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 focus:outline-none focus:border-sky-400'
+                                        className={`border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 
+                                        ${passwordStrength === 'weak' ? 'focus:outline-none focus:border-red-400' :
+                                                passwordStrength === 'medium' ? 'focus:outline-none focus:border-yellow-400' :
+                                                    passwordStrength === 'strong' ? 'focus:outline-none focus:border-green-400' : 'focus:outline-none focus:border-sky-400'}
+                                        `}
                                         onChange={handleChangePassword}
                                     />
-                                    <p className={`text-${passwordStrengthColor(passwordStrength)} text-sm`}>Password strength {passwordStrength}</p>
+                                    {(passwordTouched && password.length > 0) && (
+                                        <p className={`${passwordStrengthColor(passwordStrength)} text-sm`}>
+                                            Password strength {passwordStrength}
+                                        </p>
+                                    )}
+                                    {(password === '' && errors) && errors.filter((error) => error.field === "password").map((filteredError) => (
+                                        <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
+                                    ))}
                                 </div>
                                 <div className='input-box  flex flex-col mb-4 md:w-1/2'>
                                     <label className='font-medium mb-2'>Confirm Password</label>
@@ -112,28 +141,80 @@ const SignupPage = () => {
                                         type='password'
                                         placeholder='Confirm Password'
                                         className='border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 focus:outline-none focus:border-sky-400'
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        onChange={hanelConfirmPassword}
                                     />
+                                    {(confirmPassword.length > 0 && !passIsMatch) && (
+                                        <>
+                                            <div className='flex gap-2 text-center  ml-1'>
+                                                <FontAwesomeIcon icon={faTimes} style={{ color: 'red', display: 'inline-block' }} />
+                                                <span className='text-sm text-red-500 inline'>Password do not match.</span>
+                                            </div>
+                                        </>
+                                    )}
+
+                                    {(confirmPassword.length > 0 && passIsMatch) && (
+                                        <>
+                                            <div className='flex gap-2 text-center ml-1'>
+                                                <FontAwesomeIcon icon={faCheck} style={{ color: 'green', display: 'inline-block' }} />
+                                                <span className='text-sm text-green-500'>Password match.</span>
+                                            </div>
+                                        </>
+                                    )}
+                                    {(password === '' && confirmPassword.length > 0) && (
+                                        <>
+                                            <div className='flex gap-2 text-center ml-1'>
+                                                <FontAwesomeIcon icon={faWarning} style={{ color: 'orange', display: 'inline-block' }} />
+                                                <span className='text-sm text-orange-600 inline'>Password enter First.</span>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
-                            {errors && errors.filter((error) => error.field === "password").map((filteredError) => (
-                                <p key={filteredError.field} className='text-xs'>{filteredError.error}</p>
-                            ))}
                         </div>
                         <div className="inputBtn">
                             <button
                                 type="submit"
-                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-3'
+                                className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-3 hover:bg-blue-500'
                             >Sign up</button>
                         </div>
                         <div className='text-center my-4 text-sm md:text-base'>
                             <span className='text-slate-500'>Already have an account ?</span> <span onClick={() => {
                                 navigate('/signin')
-                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1'>Sign in instead</span>
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Sign in instead</span>
                         </div>
                     </form>
-                </div>
-            </div>
+                    {/* <div class="bg-pink-400 p-4 rounded-md">
+                        <h3 class="text-sm md:text-lg text-pink-700 font-semibold pb-2">Password should be</h3>
+                        <ul class="text-gray-200 text-sm md:text-base">
+                            <li>
+                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
+                                <span className='ml-2'>At least 8 Characters</span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
+                                <span className='ml-2'>At least 1 Number</span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
+                                <span className='ml-2'>At least 1 lowercase letter</span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
+                                <span className='ml-2'>At least 1 UPPERCASE letter</span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
+                                <span className='ml-2'>At least 1 Special Characters</span>
+                            </li>
+                        </ul>
+                    </div> */}
+                </div >
+            </div >
         </>
     )
 }
