@@ -21,7 +21,7 @@ const SignupPage = () => {
             return
         }
         try {
-            const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/signup', {
+            const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
                 email, username, password, confirmPassword
             })
             if (res.data.errors) {
