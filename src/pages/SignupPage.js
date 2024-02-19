@@ -1,39 +1,68 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-// import { SIGNUP_URL } from '../api/auth'
-
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [passwordStrength, setPasswordStrength] = useState('');
+    const navigate = useNavigate();
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [errors, setErrors] = useState([])
+    const handleChangePassword = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+        const strength = calculatePasswordStrength(newPassword);
+        setPasswordStrength(strength);
+    };
 
-    const navigate = useNavigate()
+    const calculatePasswordStrength = (password) => {
+        if (password.length < 4) {
+            return 'weak';
+        } else if (password.length >= 4 && password.length < 8) {
+            return 'medium';
+        } else if (password.length >= 8) {
+            return 'strong';
+        }
+    };
+    
 
+    const passwordStrengthColor = (strength) => {
+        if (strength === 'strong') {
+            return 'green-500';
+        } else if (strength === 'medium') {
+            return 'yellow-500';
+        } else if (strength === 'weak') {
+            return 'red-500';
+        }
+        return 'gray-500'; // Default color
+    };
+    
+    
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (password !== confirmPassword) {
-            setErrors(["Password don't match"])
-            return
+            setErrors(["Password don't match"]);
+            return;
         }
         try {
             const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
-                email, username, password, confirmPassword
-            })
+                email,
+                username,
+                password,
+                confirmPassword,
+            });
             if (res.data.errors) {
-                setErrors(res.data.errors)
+                setErrors(res.data.errors);
             } else {
-                navigate('/signin')
+                navigate('/signin');
             }
         } catch (error) {
-            console.log('Something Went Wrong.Please Wait for sometime and Try again')
+            console.log('Something Went Wrong.Please Wait for sometime and Try again');
         }
-    }
-
+    };
 
     return (
         <>
@@ -73,8 +102,9 @@ const SignupPage = () => {
                                         type='password'
                                         placeholder='Enter your password'
                                         className='border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 focus:outline-none focus:border-sky-400'
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={handleChangePassword}
                                     />
+                                    <p className={`text-${passwordStrengthColor(passwordStrength)} text-sm`}>Password strength {passwordStrength}</p>
                                 </div>
                                 <div className='input-box  flex flex-col mb-4 md:w-1/2'>
                                     <label className='font-medium mb-2'>Confirm Password</label>
@@ -87,7 +117,7 @@ const SignupPage = () => {
                                 </div>
                             </div>
                             {errors && errors.filter((error) => error.field === "password").map((filteredError) => (
-                                <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
+                                <p key={filteredError.field} className='text-xs'>{filteredError.error}</p>
                             ))}
                         </div>
                         <div className="inputBtn">
@@ -108,4 +138,4 @@ const SignupPage = () => {
     )
 }
 
-export default SignupPage
+export default SignupPage;
