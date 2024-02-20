@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faWarning,faCircleCheck,faCircleXmark,faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import './toast.css'
 
 const SignupPage = () => {
     const [username, setUsername] = useState('');
@@ -13,9 +14,9 @@ const SignupPage = () => {
     const [passwordStrength, setPasswordStrength] = useState('');
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [passIsMatch, setPassIsMatch] = useState(false)
-
+    
     const navigate = useNavigate();
-
+    
     // password strencth checker
     const handleChangePassword = (e) => {
         const newPassword = e.target.value;
@@ -24,7 +25,7 @@ const SignupPage = () => {
         setPasswordStrength(strength);
         setPasswordTouched(true)
     };
-
+    
     // calculate length and strength
     const calculatePasswordStrength = (password) => {
         if (password.length === 0) {
@@ -38,7 +39,7 @@ const SignupPage = () => {
             return 'strong';
         }
     };
-
+    
     // add color based on strength
     const passwordStrengthColor = (strength) => {
         if (strength === 'strong') {
@@ -50,15 +51,15 @@ const SignupPage = () => {
         }
         return 'text-gray-500'; // Default color
     };
-
+    
     // Confirm Password Match Check
     const hanelConfirmPassword = (e) => {
         const { value } = e.target
         setConfirmPassword(value);
         setPassIsMatch(value === password);
     }
-
-    // submit and 
+    
+    // submit 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -74,7 +75,9 @@ const SignupPage = () => {
             });
             if (res.data.errors) {
                 setErrors(res.data.errors);
+                showToast(errorMsg)
             } else {
+                showToast(successMsg)
                 navigate('/signin');
             }
         } catch (error) {
@@ -82,8 +85,42 @@ const SignupPage = () => {
         }
     };
 
+    // Toast Notification 
+    const [toasts,setToasts] = useState([])
+
+    const  successMsg = {
+        icon: <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green'}} />,
+        content :  `Successfully submitted`,
+        type:'success'
+    }
+    
+    const errorMsg = {
+        icon: <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red'}} />,
+        content : `Please fix the error!`,
+        type:'error'
+    }
+
+    const invalidMsg = {
+        icon: <FontAwesomeIcon icon={faTriangleExclamation} style={{ color: 'orange' }} />,
+        content :`Invalid input, check again`,
+        type:'invalid'
+    }
+    
+    const showToast = (msg) =>{
+        const toast = (
+            <div key={Date.now()} className={`toast ${msg.type}`}>
+                	     {msg.icon} {msg.content}
+            </div>
+        )
+        setToasts([...toasts,toast])
+        setTimeout(()=>{
+            setToasts(toasts.filter((t) => t.key !== toast.key))
+        },4000)
+    }
+
     return (
         <>
+          <div id="toastBox">{toasts}</div>
             <div className="md:bg-blue-600 min-h-screen flex justify-center items-center bg-slate-200">
                 <div className='container bg-white rounded-md max-w-md px-4 py-8 md:px-8 mx-7'>
                     <div className="text-center text-base md:text-2xl font-bold text-slate-500 mb-8 border-b border-gray-200 pb-3">Registration Form</div>
@@ -183,36 +220,6 @@ const SignupPage = () => {
                             }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Sign in instead</span>
                         </div>
                     </form>
-                    {/* <div class="bg-pink-400 p-4 rounded-md">
-                        <h3 class="text-sm md:text-lg text-pink-700 font-semibold pb-2">Password should be</h3>
-                        <ul class="text-gray-200 text-sm md:text-base">
-                            <li>
-                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
-                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
-                                <span className='ml-2'>At least 8 Characters</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
-                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
-                                <span className='ml-2'>At least 1 Number</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
-                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
-                                <span className='ml-2'>At least 1 lowercase letter</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
-                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
-                                <span className='ml-2'>At least 1 UPPERCASE letter</span>
-                            </li>
-                            <li>
-                                <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
-                                <FontAwesomeIcon icon={faXmark} style={{ color: 'white' }} />
-                                <span className='ml-2'>At least 1 Special Characters</span>
-                            </li>
-                        </ul>
-                    </div> */}
                 </div >
             </div >
         </>
