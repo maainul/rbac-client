@@ -62,10 +62,6 @@ const SignupPage = () => {
     // submit 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            setErrors(["Password don't match"]);
-            return;
-        }
         try {
             const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
                 email,
