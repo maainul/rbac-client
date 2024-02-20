@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes, faWarning, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './toast.css'
+import { SIGNUP_URL } from './../api/auth';
+
 // faTriangleExclamation
+
 const SignupPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -14,7 +17,6 @@ const SignupPage = () => {
     const [passwordStrength, setPasswordStrength] = useState('');
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [passIsMatch, setPassIsMatch] = useState(false)
-
     const navigate = useNavigate();
 
     // password strencth checker
@@ -62,39 +64,56 @@ const SignupPage = () => {
     // submit 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Clear previous errors
+        setErrors([])
+
         try {
             const frontEndErrors = []
-            if (username === '' || username === null) {
+            if (username.trim() === '' || username === null) {
                 frontEndErrors.push({ field: 'username', error: 'Please enter Username' })
-                setErrors(frontEndErrors)
-                showToast(errorMsg)
+            } else if (username.length < 4 || username.trim().length > 16) {
+                frontEndErrors.push({ field: 'username', error: 'Username must be within 4 character upto 16 character' })
             }
-            if (email === '' || email === null) {
+            if (email.trim() === '' || email === null) {
                 frontEndErrors.push({ field: 'email', error: 'Please enter email' })
-                setErrors(frontEndErrors)
-                showToast(errorMsg)
+            } else if (email.trim().length < 10 || email.trim().length > 50) {
+                frontEndErrors.push({ field: 'email', error: 'Email must be within 10 character upto 50 character' })
             }
-            if (password === '' || password === null) {
-                frontEndErrors.push({ field: 'password', error: 'Please enter password' })
-                setErrors(frontEndErrors)
-                showToast(errorMsg)
+            if (password === '') {
+                frontEndErrors.push({ field: 'password', error: 'Please enter password' });
+            } else if (password.length < 4 || password.length > 32) {
+                frontEndErrors.push({ field: 'password', error: 'Password must be between 4 and 32 characters' });
             }
-            else {
-                const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
-                    email,
-                    username,
-                    password,
-                    confirmPassword,
-                });
-                if (res.data.errors) {
-                    setErrors(res.data.errors);
-                    showToast(errorMsg)
-                } else {
-                    showToast(successMsg)
-                    setTimeout(() => {
-                        navigate('/signin');
-                    }, 4000)
-                }
+            if (confirmPassword === '') {
+                frontEndErrors.push({ field: 'confirmPassword', error: 'Please confirm your password' });
+            } else if (password !== confirmPassword) {
+                frontEndErrors.push({ field: 'confirmPassword', error: 'Passwords do not match' });
+            }
+
+            if (frontEndErrors.length > 0) {
+                // Set front-end validation errors
+                setErrors(frontEndErrors)
+                // Show toast for error
+                showToast(errorMsg)
+                return // Exit early if there are errors
+            }
+
+            // If there are no front-end validation errors, make the API call
+            const res = await axios.post(SIGNUP_URL, {
+                email,
+                username,
+                password,
+                confirmPassword,
+            });
+            if (res.data.errors) {
+                setErrors(res.data.errors);
+                showToast(errorMsg)
+            } else {
+                showToast(successMsg)
+                setTimeout(() => {
+                    navigate('/signin');
+                }, 4000)
             }
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
@@ -132,7 +151,7 @@ const SignupPage = () => {
         setToasts([...toasts, toast])
         setTimeout(() => {
             setToasts(toasts.filter((t) => t.key !== toast.key))
-        }, 4000)
+        }, 3000)
     }
 
     return (
@@ -151,7 +170,7 @@ const SignupPage = () => {
                                     className='border border-slate-300 rounded-md shadow-sm placeholder-slate-400 p-2 focus:outline-none focus:border-sky-400'
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
-                                {(username === '' && errors) && errors.filter((error) => error.field === "username").map((filteredError) => (
+                                {errors && errors.filter((error) => error.field === "username").map((filteredError) => (
                                     <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
                                 ))}
                             </div>
@@ -163,7 +182,7 @@ const SignupPage = () => {
                                     className='border border-slate-300 rounded-md shadow-sm p-2 placeholder-slate-400 focus:outline-none focus:border-sky-400'
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                {(email === '' && errors) && errors.filter((error) => error.field === "email").map((filteredError) => (
+                                {errors && errors.filter((error) => error.field === "email").map((filteredError) => (
                                     <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
                                 ))}
                             </div>
@@ -185,7 +204,7 @@ const SignupPage = () => {
                                             Password strength {passwordStrength}
                                         </p>
                                     )}
-                                    {(password === '' && errors) && errors.filter((error) => error.field === "password").map((filteredError) => (
+                                    {errors && errors.filter((error) => error.field === "password").map((filteredError) => (
                                         <p key={filteredError.field} className='text-sm text-red-500'>{filteredError.error}</p>
                                     ))}
                                 </div>
