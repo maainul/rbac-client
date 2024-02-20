@@ -63,22 +63,43 @@ const SignupPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
-                email,
-                username,
-                password,
-                confirmPassword,
-            });
-            if (res.data.errors) {
-                setErrors(res.data.errors);
+            const frontEndErrors = []
+            if(username === '' || username === null){
+                frontEndErrors.push({field:'username', error:'Please enter Username'})
+                setErrors(frontEndErrors)
                 showToast(errorMsg)
-            } else {
-                showToast(successMsg)
-                navigate('/signin');
+            }
+            if(email === '' || email === null){
+                frontEndErrors.push({field:'email', error:'Please enter email'})
+                setErrors(frontEndErrors)
+                showToast(errorMsg)
+            }
+            if(password === '' || password === null){
+                frontEndErrors.push({field:'password', error:'Please enter password'})
+                setErrors(frontEndErrors)
+                showToast(errorMsg)
+            }
+            else{
+                const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
+                    email,
+                    username,
+                    password,
+                    confirmPassword,
+                });
+                if (res.data.errors) {
+                    setErrors(res.data.errors);
+                    showToast(errorMsg)
+                } else {
+                    showToast(successMsg)
+                    setTimeout(()=>{
+                        navigate('/signin');
+                    }, 4000)
+                }
             }
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
         }
+    
     };
 
     // Toast Notification 
