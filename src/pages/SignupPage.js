@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes, faWarning,faCircleCheck,faCircleXmark,faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faWarning, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './toast.css'
-
+// faTriangleExclamation
 const SignupPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -14,9 +14,9 @@ const SignupPage = () => {
     const [passwordStrength, setPasswordStrength] = useState('');
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [passIsMatch, setPassIsMatch] = useState(false)
-    
+
     const navigate = useNavigate();
-    
+
     // password strencth checker
     const handleChangePassword = (e) => {
         const newPassword = e.target.value;
@@ -25,7 +25,7 @@ const SignupPage = () => {
         setPasswordStrength(strength);
         setPasswordTouched(true)
     };
-    
+
     // calculate length and strength
     const calculatePasswordStrength = (password) => {
         if (password.length === 0) {
@@ -39,7 +39,7 @@ const SignupPage = () => {
             return 'strong';
         }
     };
-    
+
     // add color based on strength
     const passwordStrengthColor = (strength) => {
         if (strength === 'strong') {
@@ -51,35 +51,35 @@ const SignupPage = () => {
         }
         return 'text-gray-500'; // Default color
     };
-    
+
     // Confirm Password Match Check
     const hanelConfirmPassword = (e) => {
         const { value } = e.target
         setConfirmPassword(value);
         setPassIsMatch(value === password);
     }
-    
+
     // submit 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const frontEndErrors = []
-            if(username === '' || username === null){
-                frontEndErrors.push({field:'username', error:'Please enter Username'})
+            if (username === '' || username === null) {
+                frontEndErrors.push({ field: 'username', error: 'Please enter Username' })
                 setErrors(frontEndErrors)
                 showToast(errorMsg)
             }
-            if(email === '' || email === null){
-                frontEndErrors.push({field:'email', error:'Please enter email'})
+            if (email === '' || email === null) {
+                frontEndErrors.push({ field: 'email', error: 'Please enter email' })
                 setErrors(frontEndErrors)
                 showToast(errorMsg)
             }
-            if(password === '' || password === null){
-                frontEndErrors.push({field:'password', error:'Please enter password'})
+            if (password === '' || password === null) {
+                frontEndErrors.push({ field: 'password', error: 'Please enter password' })
                 setErrors(frontEndErrors)
                 showToast(errorMsg)
             }
-            else{
+            else {
                 const res = await axios.post('https://rbac-4g20.onrender.com/api/v1/auth/signup', {
                     email,
                     username,
@@ -91,7 +91,7 @@ const SignupPage = () => {
                     showToast(errorMsg)
                 } else {
                     showToast(successMsg)
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         navigate('/signin');
                     }, 4000)
                 }
@@ -99,45 +99,45 @@ const SignupPage = () => {
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
         }
-    
+
     };
 
     // Toast Notification 
-    const [toasts,setToasts] = useState([])
+    const [toasts, setToasts] = useState([])
 
-    const  successMsg = {
-        icon: <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green'}} />,
-        content :  `Successfully submitted`,
-        type:'success'
+    const successMsg = {
+        icon: <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }} />,
+        content: `Successfully submitted`,
+        type: 'success'
     }
-    
+
     const errorMsg = {
-        icon: <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red'}} />,
-        content : `Please fix the error!`,
-        type:'error'
+        icon: <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }} />,
+        content: `Please fix the error!`,
+        type: 'error'
     }
 
-    const invalidMsg = {
-        icon: <FontAwesomeIcon icon={faTriangleExclamation} style={{ color: 'orange' }} />,
-        content :`Invalid input, check again`,
-        type:'invalid'
-    }
-    
-    const showToast = (msg) =>{
+    // const invalidMsg = {
+    //     icon: <FontAwesomeIcon icon={faTriangleExclamation} style={{ color: 'orange' }} />,
+    //     content :`Invalid input, check again`,
+    //     type:'invalid'
+    // }
+
+    const showToast = (msg) => {
         const toast = (
             <div key={Date.now()} className={`toast ${msg.type}`}>
-                	     {msg.icon} {msg.content}
+                {msg.icon} {msg.content}
             </div>
         )
-        setToasts([...toasts,toast])
-        setTimeout(()=>{
+        setToasts([...toasts, toast])
+        setTimeout(() => {
             setToasts(toasts.filter((t) => t.key !== toast.key))
-        },4000)
+        }, 4000)
     }
 
     return (
         <>
-          <div id="toastBox">{toasts}</div>
+            <div id="toastBox">{toasts}</div>
             <div className="md:bg-blue-600 min-h-screen flex justify-center items-center bg-slate-200">
                 <div className='container bg-white rounded-md max-w-md px-4 py-8 md:px-8 mx-7'>
                     <div className="text-center text-base md:text-2xl font-bold text-slate-500 mb-8 border-b border-gray-200 pb-3">Registration Form</div>
