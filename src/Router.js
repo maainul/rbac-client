@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/Dashboard';
 import ForgotPassword from './pages/ForgotPassword';
 import AuthContext from './context/AuthContext';
+import UserList from './pages/UserList';
 
 const Router = () => {
 
@@ -29,7 +30,10 @@ const Router = () => {
             )}
 
             {loggedInUserState === true && (
-                <Route path="/dashboard" element={<Dashboard />} />
+                <>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/user-list" element={<UserList />} />
+                </>
             )}
         </Routes>
     );
