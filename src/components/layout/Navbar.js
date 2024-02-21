@@ -1,26 +1,31 @@
-import { Link } from "react-router-dom"
-import axios from "axios"
-import { SIGNOUT_URL } from "../../api/auth"
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import Signout from "../../pages/Signout";
 
 
 function Navbar() {
-    const navigate = useNavigate()
-    async function LogOut() {
-        await axios.get(SIGNOUT_URL)
-        navigate('/')
-    }
 
     return (
         <div>
-            <Link to="/">Home</Link>
+            {/* {loggedInUser ? ( */}
+            {/* <> */}
+            <div className="flex flex-row justify-between bg-blue-400 text-white text-xl text-bold text-center p-4">
+                <div className="flex flex-row gap-8">
+                    <Link to="/">Home</Link>
+                    <Link to="/user-list">User list</Link>
+                </div>
+                <Signout />
+            </div>
+            {/* </> */}
+            {/* ) : ( */}
+            {/* <> */}
             <Link to="/signup">Register</Link>
             <Link to="/signin">Login</Link>
-            <Link to="/user-list">User list</Link>
-            <button onClick={LogOut}> Logout</button>
-        </div>
+            {/* </> */}
+            {/* ) */}
+            {/* } */}
+        </div >
     )
 }
-
 
 export default Navbar

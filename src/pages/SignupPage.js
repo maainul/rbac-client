@@ -5,9 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes, faWarning, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './toast.css'
 import { SIGNUP_URL } from './../api/auth';
-import useAuth from '../hooks/useAuth';
-
-// faTriangleExclamation
 
 const SignupPage = () => {
     const [username, setUsername] = useState('');
@@ -20,13 +17,7 @@ const SignupPage = () => {
     const [passIsMatch, setPassIsMatch] = useState(false)
     const navigate = useNavigate();
 
-    const { loggedInUser } = useAuth()
 
-    console.log("############## SIGNUP PAGE ###########################")
-    console.log(loggedInUser)
-    console.log("############## SIGNUP PAGE ###########################")
-
-    // const { getLoggedIn } = useContext(AuthContext)
     // password strencth checker
     const handleChangePassword = (e) => {
         const newPassword = e.target.value;
