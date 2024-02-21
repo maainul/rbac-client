@@ -7,10 +7,11 @@ import './toast.css'
 import { SIGNIN_URL } from './../api/auth';
 
 const SigninPage = () => {
+
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
-    const navigate = useNavigate();
 
     // submit 
     const handleSubmit = async (e) => {
@@ -41,14 +42,16 @@ const SigninPage = () => {
                 username,
                 password,
             });
+            // getLoggedIn()
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
             } else {
                 showToast(successMsg)
                 setTimeout(() => {
+                    console.log("################## Call to redirect #############")
                     navigate('/dashboard');
-                }, 4000)
+                }, 1000)
             }
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
