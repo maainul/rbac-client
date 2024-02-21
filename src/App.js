@@ -1,14 +1,14 @@
 import axios from 'axios';
 import './App.css';
 import { AuthContextProvider } from './context/AuthContext';
-import Router from './Router';
+import MyRoutes from './MyRoutes';
 
 axios.defaults.withCredentials = true
 
 function App() {
   return (
     <AuthContextProvider>
-      <Router />
+      <MyRoutes />
     </AuthContextProvider>
   )
 }
