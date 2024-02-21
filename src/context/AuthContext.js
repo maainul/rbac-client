@@ -1,27 +1,29 @@
-// import axios from "axios"
-// import React, { createContext, useEffect, useState } from "react"
-// import { Logged_In_Check_URL } from "../api/auth"
+import axios from "axios";
+import React, { createContext, useEffect, useState } from "react";
+import { Logged_In_Check_URL } from './../api/auth';
 
-// const AuthContext = createContext()
+const AuthContext = createContext();
 
-// function AuthContextProvider(props) {
-//     const [loggedIn, setLoggedIn] = useState(undefined)
+function AuthContextProvider(props) {
+    const [loggedInUserState, setloggedInUserState] = useState(undefined);
 
-//     async function fetchLoggedInStatus() {
-//         const res = await axios.get(Logged_In_Check_URL);
-//         setLoggedIn(res.data);
-//     }
+    async function updateLoginState() {
+        const loggedInUserStateRes = await axios.get(
+            Logged_In_Check_URL
+        );
+        setloggedInUserState(loggedInUserStateRes.data);
+    }
 
-//     useEffect(() => {
-//         fetchLoggedInStatus();
-//     }, []);
+    useEffect(() => {
+        updateLoginState();
+    }, []);
 
-//     return (
-//         <AuthContext.Provider value={{ loggedIn, fetchLoggedInStatus }}>
-//             {props.childern}
-//         </AuthContext.Provider>
-//     )
-// }
+    return (
+        <AuthContext.Provider value={{ loggedInUserState, updateLoginState }}>
+            {props.children}
+        </AuthContext.Provider>
+    );
+}
 
-// export default AuthContext
-// export { AuthContextProvider }
+export default AuthContext;
+export { AuthContextProvider };

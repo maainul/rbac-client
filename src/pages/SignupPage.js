@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes, faWarning, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './toast.css'
 import { SIGNUP_URL } from './../api/auth';
+import AuthContext from '../context/AuthContext';
 
 const SignupPage = () => {
     const [username, setUsername] = useState('');
@@ -17,6 +18,7 @@ const SignupPage = () => {
     const [passIsMatch, setPassIsMatch] = useState(false)
     const navigate = useNavigate();
 
+    const { updateLoginState } = useContext(AuthContext)
 
     // password strencth checker
     const handleChangePassword = (e) => {
@@ -105,15 +107,15 @@ const SignupPage = () => {
                 password,
                 confirmPassword,
             });
-            // getLoggedIn()
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
             } else {
                 showToast(successMsg)
                 setTimeout(() => {
+                    updateLoginState()
                     navigate('/signin');
-                }, 4000)
+                }, 2000)
             }
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
@@ -151,7 +153,7 @@ const SignupPage = () => {
         setToasts([...toasts, toast])
         setTimeout(() => {
             setToasts(toasts.filter((t) => t.key !== toast.key))
-        }, 3000)
+        }, 2000)
     }
 
     return (

@@ -1,12 +1,15 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './toast.css'
 import { SIGNIN_URL } from './../api/auth';
+import AuthContext from '../context/AuthContext';
 
 const SigninPage = () => {
+
+    const { updateLoginState } = useContext(AuthContext)
 
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
@@ -42,16 +45,16 @@ const SigninPage = () => {
                 username,
                 password,
             });
-            // getLoggedIn()
+            // updateLoginState()
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
             } else {
                 showToast(successMsg)
                 setTimeout(() => {
-                    console.log("################## Call to redirect #############")
+                    updateLoginState()
                     navigate('/dashboard');
-                }, 1000)
+                }, 500)
             }
         } catch (error) {
             console.log('Something Went Wrong.Please Wait for sometime and Try again');
@@ -83,7 +86,7 @@ const SigninPage = () => {
         setToasts([...toasts, toast])
         setTimeout(() => {
             setToasts(toasts.filter((t) => t.key !== toast.key))
-        }, 3000)
+        }, 500)
     }
 
     return (

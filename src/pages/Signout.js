@@ -1,14 +1,19 @@
 import axios from "axios"
 import { SIGNOUT_URL } from './../api/auth';
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 
 const Signout = () => {
+    const { updateLoginState } = useContext(AuthContext)
     const navigate = useNavigate()
+
     async function LogOut() {
         try {
-            await axios.get(SIGNOUT_URL) // Update loggedInUser state after logout
-            navigate('/')
+            await axios.get(SIGNOUT_URL) // Update loggedInUserStateUser state after logout
+            await updateLoginState()
+            navigate("/")
         } catch (error) {
             console.error('Logout failed:', error);
             // Handle logout failure, if needed
