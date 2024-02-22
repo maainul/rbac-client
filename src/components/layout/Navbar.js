@@ -16,6 +16,7 @@ function Navbar() {
                         <div className="flex flex-row gap-8">
                             <Link to="/">Home</Link>
                             <Link to="/user-list">User list</Link>
+                            <Link to="/application-route-list">Routes </Link>
                         </div>
                         <Signout />
                     </div>
