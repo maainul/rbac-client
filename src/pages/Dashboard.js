@@ -5,7 +5,14 @@ const Dashboard = () => {
     return (
         <>
             <Navbar />
-            <h1>Welcome Kusum</h1>
+            <div className=' mt-20 p-20'>
+                <h1 >Welcome Kusum</h1>
+                <h1>Welcome Kusum</h1>
+                <h1>Welcome Kusum</h1>
+                <h1>Welcome Kusum</h1>
+                <h1>Welcome Kusum</h1>
+                <h1>Welcome Kusum</h1>
+            </div >
         </>
     )
 }

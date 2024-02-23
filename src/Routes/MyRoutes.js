@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import PublicRoutes from './Routes/PublicRoutes';
-import PrivateRoutes from './Routes/PrivateRoutes';
-import AuthContext from './context/AuthContext';
+import PublicRoutes from './PublicRoutes';
+import PrivateRoutes from './PrivateRoutes';
+import AuthContext from '../context/AuthContext';
 
 const MyRoutes = () => {
     const { loggedInUserState } = useContext(AuthContext);

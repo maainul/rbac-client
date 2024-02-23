@@ -9,13 +9,13 @@ const ApplicationRoutes = () => {
   const [appRoutes, setAppRoutes] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const [applicationName, setApplicationName] = useState('')
-  const [applicationModuleName, setApplicationModuleName] = useState('')
-  const [routeTitle, setRouteTitle] = useState('')
-  const [path, setPath] = useState('')
-  const [element, setElement] = useState('')
-  const [routeType, setRouteType] = useState('')
-  const [status, setStatus] = useState(false)
+  // const [applicationName, setApplicationName] = useState('')
+  // const [applicationModuleName, setApplicationModuleName] = useState('')
+  // const [routeTitle, setRouteTitle] = useState('')
+  // const [path, setPath] = useState('')
+  // const [element, setElement] = useState('')
+  // const [routeType, setRouteType] = useState('')
+  // const [status, setStatus] = useState(false)
 
 
   useEffect(() => {

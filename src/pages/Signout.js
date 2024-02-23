@@ -13,7 +13,7 @@ const Signout = () => {
         try {
             await axios.get(SIGNOUT_URL) // Update loggedInUserStateUser state after logout
             await updateLoginState()
-            navigate("/")
+            navigate("/signin")
         } catch (error) {
             console.error('Logout failed:', error);
             // Handle logout failure, if needed

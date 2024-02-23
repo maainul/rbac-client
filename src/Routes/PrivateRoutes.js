@@ -1,24 +1,22 @@
 import React, { useContext } from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
-import AuthContext from './../context/AuthContext';
-import Dashboard from './../pages/Dashboard';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import UserList from './../pages/UserList';
 import ApplicaitonRoutes from '../pages/ApplicationRoutes';
+import Dashboard from '../pages/Dashboard';
+import AuthContext from '../context/AuthContext';
 
 
 
 const PrivateRoutes = () => {
     const { loggedInUserState } = useContext(AuthContext);
-
-    // If user is not logged in, redirect to sign in
+    // Redirect to login if user is not logged in
     if (!loggedInUserState) {
-        return <Navigate to="/signin" replace />;
+        return <Navigate to="/login" />;
     }
 
     return (
         <Routes>
-
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/user-list" element={<UserList />} />
             <Route path='/application-route-list' element={<ApplicaitonRoutes />} />
         </Routes>

@@ -54,7 +54,7 @@ const SigninPage = () => {
                 showToast(successMsg)
                 setTimeout(() => {
                     updateLoginState()
-                    navigate('/dashboard');
+                    navigate('/');
                 }, 500)
             }
         } catch (error) {
