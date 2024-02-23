@@ -6,3 +6,4 @@ export const Logged_In_Check_URL = `${process.env.REACT_APP_API_URL}v1/auth/logg
 
 
 export const R_ALL_APP_ROUTES = `${process.env.REACT_APP_API_URL}v1/application-route/list`
+export const C_APP_ROUTES = `${process.env.REACT_APP_API_URL}v1/application-route/create`
