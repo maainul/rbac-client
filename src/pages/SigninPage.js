@@ -10,7 +10,7 @@ import AuthContext from '../context/AuthContext';
 
 const SigninPage = () => {
 
-    const { updateLoginState } = useContext(AuthContext)
+    const { updateUserStateAndInfo } = useContext(AuthContext)
 
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
@@ -46,14 +46,15 @@ const SigninPage = () => {
                 username,
                 password,
             });
-            // updateLoginState()
+            // updateUserStateAndInfo()
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
             } else {
                 showToast(successMsg)
                 setTimeout(() => {
-                    updateLoginState()
+                    // After Signin Update State To True
+                    updateUserStateAndInfo()
                     navigate('/');
                 }, 500)
             }
@@ -63,7 +64,7 @@ const SigninPage = () => {
 
     };
 
-    // Toast Notification 
+    // Toast Notification  
     const [toasts, setToasts] = useState([])
 
     const successMsg = {

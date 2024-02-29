@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 
 const Signout = () => {
-    const { updateLoginState } = useContext(AuthContext)
+    const { updateUserStateAndInfo } = useContext(AuthContext)
     const navigate = useNavigate()
 
     async function LogOut() {
         try {
             await axios.get(SIGNOUT_URL) // Update loggedInUserStateUser state after logout
-            await updateLoginState()
+            await updateUserStateAndInfo()
             navigate("/signin")
         } catch (error) {
             console.error('Logout failed:', error);
