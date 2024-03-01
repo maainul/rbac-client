@@ -18,7 +18,7 @@ const SignupPage = () => {
     const [passIsMatch, setPassIsMatch] = useState(false)
     const navigate = useNavigate();
 
-    const { updateLoginState } = useContext(AuthContext)
+    const { updateUserStateAndInfo } = useContext(AuthContext)
 
     // password strencth checker
     const handleChangePassword = (e) => {
@@ -113,7 +113,7 @@ const SignupPage = () => {
             } else {
                 showToast(successMsg)
                 setTimeout(() => {
-                    updateLoginState()
+                    updateUserStateAndInfo()
                     navigate('/signin');
                 }, 2000)
             }

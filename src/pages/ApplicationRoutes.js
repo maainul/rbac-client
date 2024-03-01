@@ -63,6 +63,7 @@ const ApplicationRoutes = () => {
         routeType,
         status
       })
+      console.log(res)
       fetchApplicationRoutes()
     } catch (error) {
       console.log('Something Went Wrong.Please Wait for sometime and Try again');
