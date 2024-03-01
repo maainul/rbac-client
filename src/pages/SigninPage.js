@@ -46,14 +46,10 @@ const SigninPage = () => {
                 username,
                 password,
             });
-<<<<<<< HEAD
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             console.log(res)
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             // updateLoginState()
-=======
-            // updateUserStateAndInfo()
->>>>>>> 106e46e77c54fe2dc1bb2d3fe825d6a2ca71198c
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
