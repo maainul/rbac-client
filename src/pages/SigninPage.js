@@ -46,6 +46,9 @@ const SigninPage = () => {
                 username,
                 password,
             });
+            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            console.log(res)
+            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             // updateLoginState()
             if (res.data.errors) {
                 setErrors(res.data.errors);

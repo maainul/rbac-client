@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext';
 import SigninPage from '../pages/SigninPage';
 import SignupPage from './../pages/SignupPage';
 import ForgotPassword from './../pages/ForgotPassword';
+import AuthDashboard from '../pages/AuthDashboard';
 
 
 const PublicRoutes = () => {
@@ -16,6 +17,7 @@ const PublicRoutes = () => {
 
     return (
         <Routes>
+            <Route path="/" element={<AuthDashboard />} />
             <Route path="/signin" element={<SigninPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
