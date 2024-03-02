@@ -54,7 +54,7 @@ const SigninPage = () => {
                 setTimeout(() => {
                     // After Signin Update State To True
                     updateUserStateAndInfo()
-                    navigate('/');
+                    navigate('/dashboard');
                 }, 500)
             }
         } catch (error) {

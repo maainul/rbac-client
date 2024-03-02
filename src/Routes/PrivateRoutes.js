@@ -15,8 +15,8 @@ const PrivateRoutes = () => {
     return (
         <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/user-list" element={<UserList />} />
-            <Route path='/application-route-list' element={<ApplicationRoutes />} /> {/* Corrected component */}
+            <Route path="/dashboard/user-list" element={<UserList />} />
+            <Route path='/dashboard/application-route-list' element={<ApplicationRoutes />} /> {/* Corrected component */}
         </Routes>
     );
 };
