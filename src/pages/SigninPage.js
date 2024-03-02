@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import './toast.css'
+import './../utils/toast/toast.css'
 import { SIGNIN_URL } from './../api/auth';
 import AuthContext from '../context/AuthContext';
 
@@ -46,10 +46,6 @@ const SigninPage = () => {
                 username,
                 password,
             });
-            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            console.log(res)
-            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            // updateLoginState()
             if (res.data.errors) {
                 setErrors(res.data.errors);
                 showToast(errorMsg)
@@ -101,6 +97,7 @@ const SigninPage = () => {
                 <div className='container bg-white rounded-md max-w-md px-4 py-8 md:px-8 mx-7'>
                     <div className="text-center text-base md:text-2xl font-bold text-slate-500 mb-8 border-b border-gray-200 pb-3">Login Form</div>
                     <form onSubmit={handleSubmit}>
+
                         <div className='input-details text-gray-500 text-sm md:text-lg'>
                             <div className='input-box  flex flex-col mt-4'>
                                 <label className='font-medium mb-2'>User name</label>
@@ -130,17 +127,27 @@ const SigninPage = () => {
                                 </div>
                             </div>
                         </div>
+
                         <div className="inputBtn">
                             <button
                                 type="submit"
                                 className='w-full bg-blue-600 p-2 text-white rounded-md shadow-sm text-sm md:text-base mt-3 hover:bg-blue-500'
                             >Login</button>
                         </div>
+
                         <div className='text-center my-4 text-sm md:text-base'>
                             <span className='text-slate-500'>New on our platform ?</span> <span onClick={() => {
                                 navigate('/signup')
                             }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Create an account</span>
                         </div>
+
+                        <div className='text-center my-4 text-sm md:text-base'>
+                            <span className='text-slate-500'>Want to Back Multiple Signin Page ?</span> <span onClick={() => {
+                                navigate('/')
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 
+                            hover:text-indigo-400'>Go Back</span>
+                        </div>
+
                     </form>
                 </div >
             </div >

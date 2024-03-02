@@ -3,21 +3,23 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes, faWarning, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import './toast.css'
+import './../utils/toast/toast.css'
 import { SIGNUP_URL } from './../api/auth';
 import AuthContext from '../context/AuthContext';
 
 const SignupPage = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errors, setErrors] = useState([]);
-    const [passwordStrength, setPasswordStrength] = useState('');
+
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordStrength, setPasswordStrength] = useState('')
+
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [passIsMatch, setPassIsMatch] = useState(false)
-    const navigate = useNavigate();
+    const [errors, setErrors] = useState([]);
 
+    const navigate = useNavigate();
     const { updateUserStateAndInfo } = useContext(AuthContext)
 
     // password strencth checker
@@ -257,6 +259,11 @@ const SignupPage = () => {
                                 navigate('/signin')
                             }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Sign in instead</span>
                         </div>
+                        <div className='text-center my-4 text-sm md:text-base'>
+                            <span className='text-slate-500'>Want to Back Multiple Signin Page ?</span> <span onClick={() => {
+                                navigate('/')
+                            }} className='text-indigo-600 hover:cursor-pointer underline underline-offset-1 hover:text-indigo-400'>Go Back</span>
+                        </div>
                     </form>
                 </div >
             </div >
@@ -265,3 +272,7 @@ const SignupPage = () => {
 }
 
 export default SignupPage;
+
+
+// ==> 3300 (vhara) ==> 2000 given = 1300 pabo + march (2500 deoya ace advancde) = 800 pabo =
+// electricity bill

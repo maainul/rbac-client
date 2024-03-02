@@ -1,14 +1,18 @@
-import React, { useContext } from 'react'
-import Navbar from '../components/layout/Navbar';
-import AuthContext from '../context/AuthContext';
+import React from 'react'
+// import Navbar from '../components/layout/Navbar';
+// import AuthContext from '../context/AuthContext';
 
 const Dashboard = () => {
-    const { userData } = useContext(AuthContext)
+    // const { userData } = useContext(AuthContext)
+
+
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div >
-                <h1 >Welcome <span className='font-bold text-2xl'> {userData.username} - {userData.email} - {userData.role},</span></h1>
+                <h1 className='font-bold text-3xl'>Welcome
+                    {/* <span className='font-bold text-2xl'> {userData.username} - {userData.email} - {userData.role},</span> */}
+                </h1>
             </div >
         </>
     )

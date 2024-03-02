@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
-import AuthContext from '../context/AuthContext';
+// import AuthContext from '../context/AuthContext';
 
 const MyRoutes = () => {
-    const { loggedInUserState } = useContext(AuthContext);
+    // const { loggedInUserState } = useContext(AuthContext);
 
     return (
         <>
-            {loggedInUserState ? <PrivateRoutes /> : <PublicRoutes />}
+            {/* {loggedInUserState ? <PrivateRoutes /> : <PublicRoutes />} */}
+            <PrivateRoutes />
+            <PublicRoutes />
         </>
     );
 };
