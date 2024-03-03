@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebook, faLinkedin, faGoogle, faTwitter, faApple } from '@fortawesome/free-brands-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import getGoogleOAuthURL from '../utils/oAuth/getGoogleOAuthURL';
+import getFacebookOAuthURL from '../utils/oAuth/getFacebookOAuthURL';
 
 const AuthDashboard = () => {
     const navigate = useNavigate();
@@ -23,7 +24,13 @@ const AuthDashboard = () => {
                             className="mt-1 text-red-600 text-xl" />
                         Continue with Google
                     </div>
-                    <div className='flex flex-row gap-3 align-middle bg-gray-100 rounded-full p-4 font-semibold  w-72 hover:bg-blue-600 hover:text-white hover:cursor-pointer pl-8'>
+                    <div
+                        className='flex flex-row gap-3 align-middle bg-gray-100 rounded-full p-4 font-semibold  w-72 hover:bg-blue-600 hover:text-white hover:cursor-pointer pl-8'
+                        onClick={() => {
+                            const facebookOAuth = getFacebookOAuthURL()
+                            window.location.href = facebookOAuth;
+                        }}
+                    >
                         <FontAwesomeIcon
                             icon={faFacebook}
                             className="mt-1 text-blue-600 text-xl"
