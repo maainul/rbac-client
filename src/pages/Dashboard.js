@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-// import Navbar from '../components/layout/Navbar';
 import AuthContext from '../context/AuthContext';
 
 const Dashboard = () => {
