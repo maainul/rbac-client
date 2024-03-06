@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Profiler } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebook, faLinkedin, faGoogle, faTwitter, faApple } from '@fortawesome/free-brands-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -81,3 +81,4 @@ const AuthDashboard = () => {
 }
 
 export default AuthDashboard;
+
