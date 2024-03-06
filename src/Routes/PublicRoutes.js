@@ -6,6 +6,7 @@ import SignupPage from '../pages/SignupPage';
 import ForgotPassword from '../pages/ForgotPassword';
 import AuthDashboard from '../pages/AuthDashboard';
 import PageNotFound from '../pages/PageNotFound/PageNotFound';
+import LandingPage from '../pages/LandingPage';
 
 
 const PublicRoutes = () => {
@@ -19,6 +20,7 @@ const PublicRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<AuthDashboard />} />
+            <Route path="/landing-page" element={<LandingPage />} />
             <Route path="/signin" element={<SigninPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
