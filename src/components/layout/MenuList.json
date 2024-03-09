@@ -1,0 +1,22 @@
+{
+  "navItems": [
+    {
+      "title": "Charts",
+      "icon": "faChevronDown",
+      "submenu": [
+        {
+          "icon": "faGoogle",
+          "label": "Dasboard"
+        },
+        {
+          "icon": "faTwitter",
+          "label": "Dasboard"
+        },
+        {
+          "icon": "faApple",
+          "label": "Dasboard"
+        }
+      ]
+    }
+  ]
+}
