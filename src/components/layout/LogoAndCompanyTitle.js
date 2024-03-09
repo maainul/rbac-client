@@ -5,7 +5,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 const LogoAndCompanyTitle = () => {
     return (
         <>
-            <div className="px-5 py-6 cursor-pointer items-center border-b-2 border-b-gray-300 justify-between flex gap-2 mb-6">
+            <div className="px-5 py-6 cursor-pointer items-center border-b-2 border-b-gray-200 justify-between flex gap-2 mb-6">
                 <div className='flex gap-3'>
                     <img src={logo} className="w-8" alt="Logo" />
                     <span className="font-bold text-2xl text-blue-600 text-center">RBAC</span>
