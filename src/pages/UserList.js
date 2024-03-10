@@ -11,6 +11,9 @@ const UserList = () => {
         const fetchUsers = async () => {
             try {
                 const res = await axios.get(R_USR_URL);
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                console.log(res)
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                 setUsers(res.data.data);
             } catch (error) {
                 console.log('Something Went Wrong. Please Wait for sometime and Try again');
