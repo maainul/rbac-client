@@ -6,7 +6,7 @@ import navItems from './NavItems';
 const DropDownMenu = () => {
     return (
         <>
-          {navItems.map((item, index) => (
+            {navItems.map((item, index) => (
                 <SidebarItem key={index} item={item} />
             ))}
         </>

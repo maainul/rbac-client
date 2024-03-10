@@ -1,13 +1,18 @@
 import Card from "./Card"
 
-const Cards = () =>{
-    return(
+const Cards = () => {
+    return (
         <>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
         </>
     )
 }

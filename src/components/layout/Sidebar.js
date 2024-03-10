@@ -1,6 +1,6 @@
 import React from 'react'
-import LogoAndCompanyTitle from './layout/LogoAndCompanyTitle';
-import DropDownMenu from './layout/DropDownMenu';
+import LogoAndCompanyTitle from './LogoAndCompanyTitle';
+import DropDownMenu from './DropDownMenu';
 
 const Sidebar = () => {
     return (

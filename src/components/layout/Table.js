@@ -1,8 +1,8 @@
 const Table = () => {
     return (
-        <div>
+        <div >
             {/* <h1 classNameName="p-3 text-green-500 font-bold text-lg">User List</h1> */}
-            <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right">
                 <thead className="text-xs text-white uppercase bg-blue-500">
                     <tr>
                         <th scope="col" className="px-6 py-3">
@@ -27,7 +27,7 @@ const Table = () => {
                 </thead>
                 <tbody>
                     <tr className="border-b border-gray-300">
-                        <th scope="row" className="font-medium whitespace-nowrap text-gray-400 px-6 py-4">
+                        <th scope="row" className="font-medium whitespace-nowrap px-6 py-4">
                             Apple MacBook Pro 17"
                         </th>
                         <td className="px-6 py-4">
@@ -71,7 +71,7 @@ const Table = () => {
                         </td>
                     </tr>
                     <tr className=" border-b border-gray-300 ">
-                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-graay-400">
+                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                             Apple MacBook Pro 17"
                         </th>
                         <td className="px-6 py-4">
@@ -93,7 +93,7 @@ const Table = () => {
                         </td>
                     </tr>
                     <tr className=" border-b border-gray-300 ">
-                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-graay-400">
+                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                             Apple MacBook Pro 17"
                         </th>
                         <td className="px-6 py-4">

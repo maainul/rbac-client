@@ -16,7 +16,7 @@ const navItems = [
       }
     ]
   },
-    {
+  {
     title: "Charts",
     submenu: [
       {

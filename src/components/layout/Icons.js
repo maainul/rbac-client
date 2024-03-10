@@ -1,7 +1,7 @@
-const Icons = () =>{
+const Icons = () => {
     return (
         <>
-        
+
         </>
     )
-}
+} 

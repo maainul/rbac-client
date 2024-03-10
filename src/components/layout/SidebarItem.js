@@ -7,13 +7,13 @@ const SidebarItem = ({ item }) => {
         <div className='pb-2'>
             <div className='nav-title flex items-center justify-between w-full bg-gray-50 px-3 py-2 cursor-pointer'>
                 <span className='text-blue-500 uppercase font-semibold text-sm'>{item.title}</span>
-                <FontAwesomeIcon icon={faChevronDown} className='text-gray-500'/>
+                <FontAwesomeIcon icon={faChevronDown} />
             </div>
             {Array.isArray(item.submenu) && item.submenu.length > 0 && (
                 item.submenu.map((subItem, subIndex) => (
-                    <div 
-                    key={subIndex} 
-                    className='px-8 py-2 
+                    <div
+                        key={subIndex}
+                        className='px-8 py-2 
                     transition duration-500 
                     hover:bg-blue-500 
                     hover:text-white 
@@ -21,8 +21,8 @@ const SidebarItem = ({ item }) => {
                     hover:duration-1000 
                     flex item-center justify-start cursor-pointer'
                     >
-                        <img src={subItem.icon} alt={subItem.label} className='w-4 h-4 text-gray-500 mt-1 hover:text-white' />
-                        <span className='pl-3 text-gray-500 text-sm hover:text-white '>{subItem.label}</span>
+                        <img src={subItem.icon} alt={subItem.label} className='w-4 h-4 mt-1 hover:text-white' />
+                        <span className='pl-3 text-sm hover:text-white '>{subItem.label}</span>
                     </div>
                 ))
             )}

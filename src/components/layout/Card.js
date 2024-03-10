@@ -1,8 +1,8 @@
 
 
-const Card = () =>{
-   return(
-     <div className="bg-white p-5 w-full h-full shadow-md">
+const Card = () => {
+    return (
+        <div className="bg-white p-5 w-full shadow-md h-32">
             <div className='flex justify-between'>
                 <div>
                     <p>Today's Income</p>
@@ -14,7 +14,7 @@ const Card = () =>{
                 </div>
             </div>
         </div>
-   ) 
+    )
 }
 
 export default Card

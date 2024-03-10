@@ -10,7 +10,7 @@ const LogoAndCompanyTitle = () => {
                     <img src={logo} className="w-8" alt="Logo" />
                     <span className="font-bold text-2xl text-blue-600 text-center">RBAC</span>
                 </div>
-                <FontAwesomeIcon icon={faBars} className="text-xl text-gray-400" />
+                <FontAwesomeIcon icon={faBars} className="text-xl text-gray-500" />
             </div>
         </>
     )
