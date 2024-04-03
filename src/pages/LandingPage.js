@@ -6,11 +6,11 @@ import Table from "../components/layout/Table";
 
 const LandingPage = () => {
     return (
-        <div class="flex h-screen bg-gray-100 text-gray-500">
-            <div class="w-64 bg-white">
+        <div className="flex h-screen bg-gray-100 text-gray-500">
+            <div className="w-64 bg-white">
                 <Sidebar />
             </div>
-            <div class="flex-grow w-full">
+            <div className="flex-grow w-full">
                 {/* Heading of Process */}
                 <div className="flex justify-between m-10 text-gray-600">
                     <span className="font-bold">Dashboard</span>
@@ -22,8 +22,8 @@ const LandingPage = () => {
                 </div>
                 {/* Tables of Landing Page */}
 
-                <div class="relative overflow-x-auto p-10">
-                    <div class="relative overflow-x-auto shadow-md bg-white">
+                <div className="relative overflow-x-auto p-10">
+                    <div className="relative overflow-x-auto shadow-md bg-white">
                         <Table />
                     </div>
                 </div>

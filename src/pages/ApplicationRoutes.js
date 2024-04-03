@@ -143,13 +143,13 @@ const ApplicationRoutes = () => {
             <div className='my-2'>
               <label className='font-medium mb-2'>Type</label>
               <div className='input-box  flex flex-col relative mt-1' >
-                <select class="p-2 outline-none border-2 rounded-md appearance-none pr-8 bg-white" onChange={(e) => setRouteType(e.target.value)}>
+                <select className="p-2 outline-none border-2 rounded-md appearance-none pr-8 bg-white" onChange={(e) => setRouteType(e.target.value)}>
                   <option value="">Select an Option</option>
                   <option value="private">Private</option>
                   <option value="public">Public</option>
                 </select>
-                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </div>
